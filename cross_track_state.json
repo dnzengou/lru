@@ -1,0 +1,16 @@
+{
+  "version": "2.0.0",
+  "created": 1781165778,
+  "last_updated": 1782508000,
+  "afri_in_treasury": 81,
+  "universes_minted": 4,
+  "total_staked": 75,
+  "total_yield_paid": 0.010958904,
+  "mint_cost_afri": 1,
+  "stake_yield_apr": 0.05,
+  "transactions": [
+    {"type": "deposit", "amount": 50, "timestamp": 1782507000},
+    {"type": "mint", "universe_id": 4, "cost": 1, "timestamp": 1782507100},
+    {"type": "stake", "amount": 20, "timestamp": 1782507200}
+  ]
+}
