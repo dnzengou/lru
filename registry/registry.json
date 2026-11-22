@@ -1,0 +1,105 @@
+{
+  "version": "1.0.0",
+  "created": "2026-06-08T10:21:55+02:00",
+  "universes": [
+    {
+      "id": "child_255932_v3_state",
+      "hash": "671ceac4",
+      "step": 15,
+      "phi": 0.067,
+      "closure_score": 0.968,
+      "registered": "2026-06-08T09:29:09+02:00",
+      "parent": null,
+      "children": [],
+      "fitness": 0,
+      "status": "active"
+    },
+    {
+      "id": "child_566922_v3_state",
+      "hash": "4be12da1",
+      "step": 100,
+      "phi": 0.098,
+      "closure_score": 0.978,
+      "registered": "2026-06-08T09:29:10+02:00",
+      "parent": null,
+      "children": [],
+      "fitness": 0,
+      "status": "active"
+    },
+    {
+      "id": "child_gen3_1780903786_0_v3_state",
+      "hash": "f02289743d701cca",
+      "step": 0,
+      "phi": 0.4697,
+      "closure_score": 0.5735,
+      "registered": "2026-06-08T09:29:47+02:00",
+      "parent": null,
+      "children": [],
+      "fitness": 0,
+      "status": "active"
+    },
+    {
+      "id": "child_gen3_1780903787_1_v3_state",
+      "hash": "79135ab0366126f0",
+      "step": 0,
+      "phi": 0.1871,
+      "closure_score": 0.8937,
+      "registered": "2026-06-08T09:29:48+02:00",
+      "parent": null,
+      "children": [],
+      "fitness": 0,
+      "status": "active"
+    },
+    {
+      "id": "child_gen4_1780906914_0_v3_state",
+      "hash": "87e1363520bd6c06",
+      "step": 0,
+      "phi": 0.3464,
+      "closure_score": 0.7964,
+      "registered": "2026-06-08T10:21:54+02:00",
+      "parent": null,
+      "children": [],
+      "fitness": 0,
+      "status": "active"
+    },
+    {
+      "id": "child_gen4_1780906914_1_v3_state",
+      "hash": "78f69dae2a0507c2",
+      "step": 0,
+      "phi": 0.476,
+      "closure_score": 0.7621,
+      "registered": "2026-06-08T10:21:54+02:00",
+      "parent": null,
+      "children": [],
+      "fitness": 0,
+      "status": "active"
+    },
+    {
+      "id": "child_gen4_1780906914_2_v3_state",
+      "hash": "260f42c0eb68ae3e",
+      "step": 0,
+      "phi": 0.0232,
+      "closure_score": 0.6971,
+      "registered": "2026-06-08T10:21:54+02:00",
+      "parent": null,
+      "children": [],
+      "fitness": 0,
+      "status": "active"
+    },
+    {
+      "id": "child_gen4_1780906914_3_v3_state",
+      "hash": "aca0446d434dc921",
+      "step": 0,
+      "phi": 0.1259,
+      "closure_score": 0.6215,
+      "registered": "2026-06-08T10:21:55+02:00",
+      "parent": null,
+      "children": [],
+      "fitness": 0,
+      "status": "active"
+    }
+  ],
+  "total_universes": 8,
+  "root_universe": "child_255932_v3_state",
+  "generation": 0
+}

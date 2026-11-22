@@ -1,0 +1,34 @@
+# Runtime artefacts
+backups/
+children/
+tmp/
+.tmp_v*/
+*_history*.txt
+history.txt
+evolution_history.txt
+universe_state_v*.json
+cross_track_bridge.dat
+
+# DAO/comms runtime output (seeds are kept, generated files aren't)
+dao/comms/
+dao/votes/
+dao/votes_v*/
+dao/proposals/
+dao/proposals_v*/
+dao/dao_state_v*.json
+dao/comms_history*.txt
+phoenix/phoenix_*.json
+
+# Binaries
+go/universe-dao
+go/universe-dao.exe
+*.exe
+*.test
+
+# Editor
+.vscode/
+.idea/
+*.swp
+.DS_Store
+python/__pycache__/
+*.pyc
