@@ -135,6 +135,72 @@ make test
 Runs bash parse checks, Python compile, `go vet` + build, JSON state
 validation, and `--help` dispatch. CI runs this on every push.
 
+## Related work & sibling projects
+
+LRU is the broad sandbox; several narrower tools borrow one slice of it
+and apply it to a single, hardened use case. The relationship is
+deliberate: experimental frames stay here, productised slices leave.
+
+### Sealwright — the audit-grade claw
+
+[`dnzengou/sealwright`](https://github.com/dnzengou/sealwright) is a
+sealed desk for private work with a provable audit. Its per-epoch
+"claw" asks a single-epoch question (did this mutant drop fitness, did
+it open the seal). Sealwright is adopting **one** slice of LRU's
+quorum toolkit: a `quorum_pressure` field accumulated across epochs,
+surfaced on the Guard tile, used to refuse a new epoch once the
+threshold is crossed (reviewer must acknowledge).
+
+The framing that justifies that import — *"quorum tips before the
+curve peaks"* — is the argument for why a weekly stamp beats a
+per-request guardrail, and lives in Sealwright's whitepaper as a
+single paragraph that links back here.
+
+Everything downstream of that one field stays in LRU.
+
+### The quorum engine
+
+A cumulative-pressure read across epochs (in contrast to the claw's
+per-epoch gate). Two uses:
+
+1. **Drift pressure on the policy.** Each PARTIAL_MERGE and each small
+   fitness dip is an "autoinducer". When running pressure crosses
+   threshold, the desk refuses further epochs and surfaces
+   `quorum reached — review the lineage` instead of silently shipping
+   the eleventh almost-fine stamp. Catches slow policy decay that a
+   single-epoch gate misses.
+2. **Audit pressure on the operator.** Accumulate signals correlated
+   with a seal being lifted on purpose (remote base set, airgap
+   lifted, bounds dropped, heavy balloon on). A weekly quorum-style
+   index; a reviewer reading `state.json` sees a number, not seven
+   flags. Scoring change, not a new gate.
+
+### Research themes that live here, not downstream
+
+LRU is where speculative and biomimetic frames belong — kept out of
+hardened productised tools so their lexicon stays plain:
+
+- **SEIR / epidemic dynamics** — modelling policy-drift spread across a
+  universe's children.
+- **Kessler syndrome** — cascade failure of orbital constraints as a
+  metaphor for runaway mutation.
+- **Red Queen dynamics** — co-evolving self-model vs. environment.
+- **Trophic cascade** — top-down effects of a Phoenix rebirth on the
+  child registry.
+- **DARE (Deterrence / Assurance / Reassurance / Engagement)** — the
+  governance posture layer around the DAO.
+- **Biomimicry** — quorum sensing, autoinducers, sporulation thresholds.
+- **Costate / citadel** — dual-process guardrails around the self-model.
+- **Garden game** — the playable "tend a locally real universe" layer.
+- **Stoic / quantum essays** — prose that frames *why* a locally real
+  universe is a worthwhile foil to our locally unreal one.
+
+### Containment / Effect-Based Assurance
+
+Adjacent academic framing for the DAO's refusal rule — "the engine
+refuses any edit that removes containment, regardless of fitness
+gain." Worth a "Related work" line in a future whitepaper here.
+
 ## Attribution
 
 Successor to the original Termux-hosted `local-real-universe` workspace.
