@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0a0a0f">
+<meta name="color-scheme" content="dark">
+<meta name="description" content="LRU — Locally Real Universe. A causally-closed neural micro-universe with DAO governance, Phoenix rebirth, and cross-track comms. Inspired by the 2022 Nobel Prize in Physics.">
+<meta property="og:title" content="LRU — Locally Real Universe">
+<meta property="og:description" content="What would it take to build a universe that is locally real — from scratch?">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://dnzengou.github.io/lru/">
+<title>LRU — Locally Real Universe</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='30' fill='none' stroke='%23f59e0b' stroke-width='3'/%3E%3Ccircle cx='50' cy='50' r='8' fill='%23f59e0b'/%3E%3C/svg%3E">
+<style>
+:root{
+  --bg:#0a0a0f;
+  --bg-2:#111118;
+  --bg-3:#15151e;
+  --border:#1a1a2e;
+  --border-2:#242438;
+  --text:#e6e6ee;
+  --muted:#8a8aa0;
+  --muted-2:#5a5a70;
+  --gold:#f59e0b;
+  --green:#22c55e;
+  --blue:#3b82f6;
+  --purple:#a855f7;
+  --red:#ef4444;
+  --orange:#f97316;
+  --mono:ui-monospace,SFMono-Regular,'SF Mono',Menlo,Consolas,'Liberation Mono',monospace;
+  --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Inter,system-ui,sans-serif;
+  --gutter:clamp(16px,4vw,32px);
+  --radius:14px;
+  --radius-sm:10px;
+}
+@media (prefers-color-scheme:light){
+  :root:not([data-theme="dark"]){
+    --bg:#fafafa;--bg-2:#fff;--bg-3:#f1f1f5;--border:#e4e4ec;--border-2:#d6d6e0;
+    --text:#0b0b14;--muted:#5a5a70;--muted-2:#8a8aa0;
+  }
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--sans);
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.55;
+  min-height:100dvh;
+  overflow-x:hidden;
+  font-feature-settings:"ss01","cv11";
+}
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background:
+    radial-gradient(900px 500px at 15% -5%,rgba(245,158,11,.10),transparent 60%),
+    radial-gradient(800px 600px at 110% 20%,rgba(168,85,247,.10),transparent 60%),
+    radial-gradient(700px 500px at 50% 110%,rgba(59,130,246,.08),transparent 60%);
+}
+.wrap{max-width:1040px;margin:0 auto;padding:0 var(--gutter);position:relative;z-index:1}
+
+/* ── Nav ─────────────────────────────────────── */
+nav{
+  position:sticky;top:0;z-index:50;
+  background:color-mix(in srgb,var(--bg) 82%,transparent);
+  -webkit-backdrop-filter:saturate(180%) blur(14px);
+  backdrop-filter:saturate(180%) blur(14px);
+  border-bottom:1px solid var(--border);
+}
+.nav-inner{
+  max-width:1040px;margin:0 auto;padding:12px var(--gutter);
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;letter-spacing:.2px}
+.brand .dot{width:12px;height:12px;border-radius:50%;background:var(--gold);box-shadow:0 0 18px var(--gold);animation:pulse 3.2s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.25);opacity:.75}}
+.nav-links{display:none;gap:22px;font-size:14px;color:var(--muted)}
+.nav-links a{color:inherit;text-decoration:none;transition:color .15s}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:8px 14px;border-radius:999px;
+  background:var(--gold);color:#0a0a0f;font-weight:600;font-size:13px;
+  text-decoration:none;transition:transform .15s,box-shadow .15s;
+  box-shadow:0 6px 20px -8px var(--gold);
+}
+.nav-cta:active{transform:scale(.96)}
+@media(min-width:720px){.nav-links{display:flex}}
+
+/* ── Hero ────────────────────────────────────── */
+header.hero{padding:clamp(48px,10vw,120px) 0 clamp(40px,8vw,80px)}
+.pill{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:6px 12px;border-radius:999px;
+  background:var(--bg-2);border:1px solid var(--border-2);
+  font-size:12px;color:var(--muted);letter-spacing:.3px;text-transform:uppercase;
+  margin-bottom:22px;
+}
+.pill .spark{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 10px var(--green)}
+h1{
+  font-size:clamp(34px,7.2vw,68px);
+  line-height:1.03;letter-spacing:-.025em;font-weight:800;
+  margin-bottom:18px;
+}
+h1 .grad{
+  background:linear-gradient(135deg,var(--gold) 0%,#fbbf24 40%,var(--orange) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.lede{
+  font-size:clamp(16px,2.6vw,20px);
+  color:var(--muted);max-width:640px;margin-bottom:28px;
+}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 20px;border-radius:12px;font-weight:600;font-size:15px;
+  text-decoration:none;transition:transform .15s,box-shadow .2s,background .15s;
+  min-height:48px;
+}
+.btn:active{transform:scale(.97)}
+.btn-primary{background:var(--gold);color:#0a0a0f;box-shadow:0 10px 30px -10px var(--gold)}
+.btn-primary:hover{box-shadow:0 14px 36px -10px var(--gold)}
+.btn-ghost{background:var(--bg-2);color:var(--text);border:1px solid var(--border-2)}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+
+/* ── Stat strip ──────────────────────────────── */
+.stat-strip{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:1px;
+  background:var(--border);border:1px solid var(--border);border-radius:var(--radius);
+  overflow:hidden;margin-top:36px;
+}
+.stat{background:var(--bg-2);padding:18px}
+.stat .k{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px}
+.stat .v{font-size:clamp(20px,3.6vw,26px);font-weight:700;font-family:var(--mono)}
+.stat .v.gold{color:var(--gold)}.stat .v.green{color:var(--green)}
+.stat .v.purple{color:var(--purple)}.stat .v.blue{color:var(--blue)}
+@media(min-width:640px){.stat-strip{grid-template-columns:repeat(4,1fr)}}
+
+/* ── Sections ────────────────────────────────── */
+section{padding:clamp(48px,8vw,96px) 0;position:relative}
+section + section{border-top:1px solid var(--border)}
+.eyebrow{
+  font-size:12px;color:var(--gold);text-transform:uppercase;
+  letter-spacing:1.4px;font-weight:600;margin-bottom:14px;
+}
+h2{font-size:clamp(24px,4.6vw,38px);line-height:1.15;letter-spacing:-.02em;font-weight:700;margin-bottom:14px}
+h3{font-size:clamp(17px,2.4vw,20px);font-weight:700;margin-bottom:8px}
+p.sub{color:var(--muted);max-width:640px;margin-bottom:28px;font-size:clamp(15px,2vw,17px)}
+
+/* ── Nobel card ──────────────────────────────── */
+.quote-card{
+  background:linear-gradient(180deg,var(--bg-2) 0%,var(--bg-3) 100%);
+  border:1px solid var(--border-2);border-radius:var(--radius);
+  padding:clamp(22px,4vw,34px);
+  position:relative;overflow:hidden;
+}
+.quote-card::before{
+  content:"🏆";position:absolute;top:-10px;right:-6px;font-size:120px;opacity:.06;
+  transform:rotate(-12deg);pointer-events:none;
+}
+.quote-card blockquote{
+  font-size:clamp(16px,2.4vw,19px);line-height:1.55;color:var(--text);
+  border-left:3px solid var(--gold);padding-left:18px;margin-bottom:18px;
+  font-style:italic;
+}
+.quote-card .cite{color:var(--muted);font-size:14px}
+.quote-card .cite b{color:var(--gold);font-style:normal}
+
+/* ── Feature grid ────────────────────────────── */
+.grid{display:grid;gap:14px;grid-template-columns:1fr}
+@media(min-width:640px){.grid{grid-template-columns:repeat(2,1fr);gap:18px}}
+@media(min-width:960px){.grid-3{grid-template-columns:repeat(3,1fr)}}
+.card{
+  background:var(--bg-2);border:1px solid var(--border);border-radius:var(--radius);
+  padding:22px;transition:transform .2s,border-color .2s,background .2s;
+}
+.card:hover{transform:translateY(-2px);border-color:var(--border-2)}
+.card .icon{
+  width:40px;height:40px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;margin-bottom:14px;
+}
+.icon.gold{background:rgba(245,158,11,.14);color:var(--gold)}
+.icon.green{background:rgba(34,197,94,.14);color:var(--green)}
+.icon.blue{background:rgba(59,130,246,.14);color:var(--blue)}
+.icon.purple{background:rgba(168,85,247,.14);color:var(--purple)}
+.icon.red{background:rgba(239,68,68,.14);color:var(--red)}
+.icon.orange{background:rgba(249,115,22,.14);color:var(--orange)}
+.card p{color:var(--muted);font-size:14.5px;line-height:1.6}
+
+/* ── Code block ──────────────────────────────── */
+.code{
+  background:#07070c;border:1px solid var(--border-2);
+  border-radius:var(--radius);overflow:hidden;
+  font-family:var(--mono);font-size:13.5px;line-height:1.7;
+}
+.code-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 16px;background:var(--bg-3);border-bottom:1px solid var(--border);
+  font-size:12px;color:var(--muted);
+}
+.code-head .dots{display:flex;gap:6px}
+.code-head .dots span{width:10px;height:10px;border-radius:50%;background:var(--border-2)}
+.code-head .dots span:nth-child(1){background:#f87171}
+.code-head .dots span:nth-child(2){background:#fbbf24}
+.code-head .dots span:nth-child(3){background:#4ade80}
+.code pre{padding:16px 18px;overflow-x:auto;color:#e6e6ee;-webkit-overflow-scrolling:touch}
+.code .c{color:#6a7390}
+.code .k{color:#f59e0b}
+.code .s{color:#86efac}
+.code .n{color:#a5b4fc}
+.copy-btn{
+  background:transparent;border:1px solid var(--border-2);color:var(--muted);
+  padding:4px 10px;border-radius:6px;font-size:11px;cursor:pointer;
+  font-family:var(--sans);transition:color .15s,border-color .15s;
+}
+.copy-btn:active{transform:scale(.95)}
+.copy-btn.ok{color:var(--green);border-color:var(--green)}
+
+/* ── Arch diagram ────────────────────────────── */
+.arch{
+  background:var(--bg-2);border:1px solid var(--border);border-radius:var(--radius);
+  padding:clamp(18px,4vw,30px);font-family:var(--mono);font-size:13px;
+  color:var(--muted);overflow-x:auto;-webkit-overflow-scrolling:touch;
+}
+.arch pre{color:var(--text);line-height:1.7;white-space:pre}
+
+/* ── Tabs ────────────────────────────────────── */
+.tabs{display:flex;gap:4px;background:var(--bg-2);padding:4px;border-radius:12px;border:1px solid var(--border);margin-bottom:14px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tab{
+  flex:1;min-width:max-content;
+  padding:10px 16px;border-radius:9px;
+  background:transparent;color:var(--muted);border:none;
+  cursor:pointer;font-weight:500;font-size:13.5px;font-family:var(--sans);
+  transition:background .15s,color .15s;white-space:nowrap;
+}
+.tab.active{background:var(--bg-3);color:var(--text);box-shadow:0 1px 0 var(--border-2)}
+.tab-panel{display:none}
+.tab-panel.active{display:block;animation:fade .25s ease}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+/* ── Related ─────────────────────────────────── */
+.rel-card{
+  display:flex;flex-direction:column;gap:12px;
+  background:var(--bg-2);border:1px solid var(--border);
+  border-radius:var(--radius);padding:22px;
+  text-decoration:none;color:inherit;transition:border-color .2s,transform .2s;
+}
+.rel-card:hover{border-color:var(--gold);transform:translateY(-2px)}
+.rel-card .tag{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:11px;color:var(--gold);text-transform:uppercase;letter-spacing:1px;font-weight:600;
+}
+.rel-card p{color:var(--muted);font-size:14.5px}
+.rel-card .arrow{align-self:flex-end;color:var(--muted);transition:color .2s,transform .2s}
+.rel-card:hover .arrow{color:var(--gold);transform:translateX(4px)}
+
+/* ── Video ───────────────────────────────────── */
+.video-row{display:grid;gap:14px;grid-template-columns:1fr}
+@media(min-width:640px){.video-row{grid-template-columns:1fr 1fr}}
+.video{
+  display:flex;flex-direction:column;gap:10px;
+  background:var(--bg-2);border:1px solid var(--border);border-radius:var(--radius);
+  padding:16px;text-decoration:none;color:inherit;
+  transition:border-color .2s;
+}
+.video:hover{border-color:var(--red)}
+.video .thumb{
+  aspect-ratio:16/9;background:var(--bg-3);border-radius:10px;
+  display:flex;align-items:center;justify-content:center;font-size:32px;
+  border:1px solid var(--border-2);
+  background-image:linear-gradient(135deg,rgba(239,68,68,.12),rgba(168,85,247,.08));
+}
+.video .meta{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px}
+.video .title{font-weight:600;font-size:14.5px;line-height:1.4}
+
+/* ── Footer ──────────────────────────────────── */
+footer{
+  border-top:1px solid var(--border);
+  padding:34px 0 60px;color:var(--muted);font-size:13.5px;
+  text-align:center;
+}
+footer a{color:var(--text);text-decoration:none}
+footer a:hover{color:var(--gold)}
+.foot-links{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+
+/* ── Utility ─────────────────────────────────── */
+.sr{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="brand"><span class="dot"></span>LRU</div>
+    <div class="nav-links">
+      <a href="#what">What</a>
+      <a href="#arch">Architecture</a>
+      <a href="#start">Quickstart</a>
+      <a href="#related">Related</a>
+    </div>
+    <a class="nav-cta" href="https://github.com/dnzengou/lru" aria-label="View on GitHub">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+      GitHub
+    </a>
+  </div>
+</nav>
+
+<main>
+  <div class="wrap">
+
+    <header class="hero">
+      <span class="pill"><span class="spark"></span>v0.9.0 · causally closed</span>
+      <h1>Build a universe<br><span class="grad">that is locally real.</span></h1>
+      <p class="lede">
+        A self-contained neural micro-universe with its own clock,
+        constitution, and rebirth protocol. Trains a self-model,
+        votes on its own parameters, spawns children, rebirths
+        through a Phoenix Protocol when it collapses.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="#start">
+          Quickstart
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <a class="btn btn-ghost" href="https://github.com/dnzengou/lru">View source</a>
+      </div>
+
+      <div class="stat-strip" role="group" aria-label="Universe stats">
+        <div class="stat"><div class="k">Hidden size</div><div class="v gold">16</div></div>
+        <div class="stat"><div class="k">Attention heads</div><div class="v green">8</div></div>
+        <div class="stat"><div class="k">DAO quorum</div><div class="v purple">50%</div></div>
+        <div class="stat"><div class="k">Phoenix trigger</div><div class="v blue">φ ≤ .001</div></div>
+      </div>
+    </header>
+
+    <section id="what">
+      <div class="eyebrow">Inspiration</div>
+      <h2>Inverting the 2022 Nobel question</h2>
+      <p class="sub">
+        Aspect, Clauser & Zeilinger's experiments with entangled
+        photons showed the universe we inhabit is <em>not</em>
+        locally real — which fuelled the modern simulation-hypothesis
+        conversation. LRU flips the question.
+      </p>
+      <div class="quote-card">
+        <blockquote>
+          "What does it take to build a universe that <b>is</b> locally real —
+          from scratch? And then study it against our locally unreal one."
+        </blockquote>
+        <div class="cite"><b>LRU</b> — a deterministic, causally closed, self-modelling
+          micro-universe. Not a physics simulator; a counterpoint.</div>
+      </div>
+    </section>
+
+    <section id="what-features">
+      <div class="eyebrow">What it does</div>
+      <h2>Five sealed primitives</h2>
+      <div class="grid grid-3">
+        <div class="card">
+          <div class="icon gold">🧠</div>
+          <h3>Neural MVU</h3>
+          <p>GRU recurrent core with 8-head attention. Trains a self-model and tracks Φ, entropy, and closure score each tick.</p>
+        </div>
+        <div class="card">
+          <div class="icon green">🔗</div>
+          <h3>Causal wall</h3>
+          <p>Every step hashes into a SHA-256 chain. The wall is verifiable, offline, and tamper-evident.</p>
+        </div>
+        <div class="card">
+          <div class="icon purple">🗳</div>
+          <h3>DAO governance</h3>
+          <p>Proposals, votes, treasury. Parameter mutations only pass with quorum and threshold — containment never waived.</p>
+        </div>
+        <div class="card">
+          <div class="icon red">🔥</div>
+          <h3>Phoenix Protocol</h3>
+          <p>When closure collapses below a threshold the universe snapshots, mutates, and rebirths itself.</p>
+        </div>
+        <div class="card">
+          <div class="icon blue">🌱</div>
+          <h3>Child spawning</h3>
+          <p>Spawn mutant children, register them, score fitness, select survivors. Evolution without a genome file.</p>
+        </div>
+        <div class="card">
+          <div class="icon orange">📡</div>
+          <h3>Cross-track comms</h3>
+          <p>Universes broadcast state deltas; a live dashboard visualises Φ, closure, and Phoenix events in real time.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="arch">
+      <div class="eyebrow">Architecture</div>
+      <h2>One lifecycle, three engines</h2>
+      <p class="sub">POSIX shell for the offline path, Python for the enhanced trainer, Go for the HTTP governance surface. All three share JSON state under <code>LRU_BASE_DIR</code>.</p>
+      <div class="arch">
+<pre>┌──────────────────────────────────────────────────────────────┐
+│  Neural MVU  ─▶  Self-model (GRU + 8-head attention)         │
+│       │          ├─ Causal wall (SHA-256)                    │
+│       │          ├─ Φ / entropy / closure metrics            │
+│       │          └─ Child spawning                           │
+│       ▼                                                      │
+│   DAO Engine ─▶  Proposals · votes · parameter evolution     │
+│       │          ├─ Treasury                                 │
+│       │          └─ Phoenix rebirth on stagnation            │
+│       ▼                                                      │
+│  Cross-track bridge ─▶ Comms protocol / live dashboard       │
+└──────────────────────────────────────────────────────────────┘</pre>
+      </div>
+    </section>
+
+    <section id="start">
+      <div class="eyebrow">Quickstart</div>
+      <h2>Clone, train, spawn.</h2>
+      <p class="sub">POSIX box with <code>bash</code>, <code>awk</code>, <code>bc</code>. Add Python 3 or Go only if you want the enhanced engines.</p>
+
+      <div class="tabs" role="tablist">
+        <button class="tab active" role="tab" data-tab="t1">make</button>
+        <button class="tab" role="tab" data-tab="t2">shell</button>
+        <button class="tab" role="tab" data-tab="t3">docker</button>
+        <button class="tab" role="tab" data-tab="t4">go</button>
+      </div>
+
+      <div class="tab-panel active" id="t1">
+        <div class="code">
+          <div class="code-head"><div class="dots"><span></span><span></span><span></span></div><button class="copy-btn" data-copy="make">Copy</button></div>
+<pre><span class="c"># Full lifecycle: train → run → spawn → DAO evolve</span>
+<span class="k">git clone</span> https://github.com/dnzengou/lru.git &amp;&amp; <span class="k">cd</span> lru
+<span class="k">make</span> all
+
+<span class="c"># Or more granular</span>
+<span class="k">make</span> train TRAIN_STEPS=<span class="n">200</span>
+<span class="k">make</span> run   RUN_STEPS=<span class="n">100</span>
+<span class="k">make</span> spawn
+<span class="k">make</span> evolve
+<span class="k">make</span> status
+<span class="k">make</span> phoenix</pre>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="t2">
+        <div class="code">
+          <div class="code-head"><div class="dots"><span></span><span></span><span></span></div><button class="copy-btn" data-copy="sh">Copy</button></div>
+<pre><span class="c"># Direct engine</span>
+<span class="k">bash</span> scripts/run_universe.sh --help
+<span class="k">bash</span> scripts/run_universe.sh --train <span class="n">200</span>
+<span class="k">bash</span> scripts/run_universe.sh --train-fast <span class="n">500</span>
+<span class="k">bash</span> scripts/run_universe.sh --run <span class="n">100</span>
+<span class="k">bash</span> scripts/run_universe.sh --evolve
+<span class="k">bash</span> scripts/run_universe.sh --benchmark</pre>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="t3">
+        <div class="code">
+          <div class="code-head"><div class="dots"><span></span><span></span><span></span></div><button class="copy-btn" data-copy="docker">Copy</button></div>
+<pre><span class="c"># Containerised full stack</span>
+<span class="k">make</span> docker-build
+<span class="k">make</span> docker-run
+<span class="c"># Dashboard at http://localhost:8080/</span></pre>
+        </div>
+      </div>
+
+      <div class="tab-panel" id="t4">
+        <div class="code">
+          <div class="code-head"><div class="dots"><span></span><span></span><span></span></div><button class="copy-btn" data-copy="go">Copy</button></div>
+<pre><span class="c"># Go DAO HTTP engine</span>
+<span class="k">make</span> go-build
+<span class="k">make</span> go-run
+
+<span class="c"># Endpoints</span>
+<span class="k">curl</span> localhost:8080/status
+<span class="k">curl</span> localhost:8080/train -d <span class="s">'steps=100'</span>
+<span class="k">curl</span> localhost:8080/propose -d <span class="s">'...'</span></pre>
+        </div>
+      </div>
+    </section>
+
+    <section id="themes">
+      <div class="eyebrow">Research themes</div>
+      <h2>The broad sandbox</h2>
+      <p class="sub">LRU is where speculative and biomimetic frames live — kept out of hardened productised tools so their lexicon stays plain.</p>
+      <div class="grid grid-3">
+        <div class="card"><h3>🌐 SEIR dynamics</h3><p>Modelling policy-drift spread across a universe's children.</p></div>
+        <div class="card"><h3>🛰 Kessler syndrome</h3><p>Cascade failure of orbital constraints as a metaphor for runaway mutation.</p></div>
+        <div class="card"><h3>👑 Red Queen</h3><p>Co-evolving self-model vs. environment — running to stay in place.</p></div>
+        <div class="card"><h3>🌲 Trophic cascade</h3><p>Top-down effects of a Phoenix rebirth on the child registry.</p></div>
+        <div class="card"><h3>🛡 DARE posture</h3><p>Deterrence · Assurance · Reassurance · Engagement around the DAO.</p></div>
+        <div class="card"><h3>🧫 Biomimicry</h3><p>Quorum sensing, autoinducers, sporulation thresholds.</p></div>
+        <div class="card"><h3>🏯 Costate / citadel</h3><p>Dual-process guardrails around the self-model.</p></div>
+        <div class="card"><h3>🌿 Garden game</h3><p>The playable "tend a locally real universe" layer.</p></div>
+        <div class="card"><h3>⚛ Stoic / quantum essays</h3><p>Why a locally real universe is a worthwhile foil to our locally unreal one.</p></div>
+      </div>
+    </section>
+
+    <section id="related">
+      <div class="eyebrow">Sibling projects</div>
+      <h2>Slices leave, the sandbox stays.</h2>
+      <p class="sub">LRU is deliberately broad. Downstream tools pull one slice at a time and harden it for a single use case.</p>
+      <div class="grid">
+        <a class="rel-card" href="https://github.com/dnzengou/sealwright">
+          <span class="tag">● Downstream</span>
+          <h3>Sealwright</h3>
+          <p>A sealed desk for private work with a provable audit. Importing LRU's <code>quorum_pressure</code> field — the "quorum tips before the curve peaks" framing — to refuse new epochs past a threshold.</p>
+          <span class="arrow">→</span>
+        </a>
+        <a class="rel-card" href="https://github.com/dnzengou/lru#the-quorum-engine">
+          <span class="tag">● Core here</span>
+          <h3>Quorum engine</h3>
+          <p>Cumulative pressure across epochs: drift pressure on the policy, audit pressure on the operator. The contrast to a single-epoch gate.</p>
+          <span class="arrow">→</span>
+        </a>
+      </div>
+    </section>
+
+    <section id="watch">
+      <div class="eyebrow">Further viewing</div>
+      <h2>Why "not locally real" matters</h2>
+      <div class="video-row">
+        <a class="video" href="https://youtu.be/o-g0HnbZ_kQ" target="_blank" rel="noopener">
+          <div class="thumb">▶</div>
+          <div class="meta">YouTube · Nobel</div>
+          <div class="title">Why the universe is not locally real — and the 2022 Nobel Prize</div>
+        </a>
+        <a class="video" href="https://youtu.be/EykaPqzzdQg" target="_blank" rel="noopener">
+          <div class="thumb">▶</div>
+          <div class="meta">YouTube · Simulation hypothesis</div>
+          <div class="title">Are we living in a simulation? — a short brief</div>
+        </a>
+      </div>
+    </section>
+
+    <footer>
+      <div>Licensed under MIT · Successor to the Termux-hosted <code>local-real-universe</code> workspace.</div>
+      <div class="foot-links">
+        <a href="https://github.com/dnzengou/lru">Source</a>
+        <a href="https://github.com/dnzengou/lru/issues">Issues</a>
+        <a href="https://github.com/dnzengou/sealwright">Sealwright</a>
+        <a href="https://github.com/dnzengou/lru/blob/main/LICENSE">License</a>
+      </div>
+    </footer>
+
+  </div>
+</main>
+
+<script>
+// Tabs
+document.querySelectorAll('.tab').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const id=btn.dataset.tab;
+    document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t===btn));
+    document.querySelectorAll('.tab-panel').forEach(p=>p.classList.toggle('active',p.id===id));
+  });
+});
+
+// Copy
+document.querySelectorAll('.copy-btn').forEach(btn=>{
+  btn.addEventListener('click',async()=>{
+    const pre=btn.closest('.code').querySelector('pre');
+    try{
+      await navigator.clipboard.writeText(pre.innerText);
+      const was=btn.textContent;
+      btn.textContent='Copied ✓';btn.classList.add('ok');
+      setTimeout(()=>{btn.textContent=was;btn.classList.remove('ok')},1400);
+    }catch(e){
+      btn.textContent='Press ⌘C';
+    }
+  });
+});
+
+// Smooth anchor scroll for nav offset
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const id=a.getAttribute('href').slice(1);
+    const el=document.getElementById(id);
+    if(!el)return;
+    e.preventDefault();
+    const y=el.getBoundingClientRect().top+window.scrollY-60;
+    window.scrollTo({top:y,behavior:'smooth'});
+    history.replaceState(null,'','#'+id);
+  });
+});
+</script>
+
+</body>
+</html>
