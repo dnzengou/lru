@@ -8,6 +8,29 @@ Phoenix Protocol when its state collapses.
 Everything runs offline on POSIX tools (`awk`, `bc`, `sha256sum`, `seq`) or
 — for the heavier workload — Python 3 and Go.
 
+## Inspiration
+
+This project was inspired by the 2022 Nobel Prize 🏆 in Physics awarded
+to Alain Aspect, John F. Clauser, and Anton Zeilinger "for experiments
+with entangled photons, establishing the violation of Bell inequalities
+and pioneering quantum information science" — work that showed the
+universe is **not locally real**, and which has fuelled the modern
+simulation-hypothesis conversation ("we 'might' be living in a
+simulation").
+
+LRU flips the question around: *what does it take to build a universe
+that **is** locally real — from scratch?* A deterministic, causally
+closed, self-modelling micro-universe with its own clock, its own
+constitution (the DAO), and its own rebirth protocol. The goal is to
+study it as a counterpoint to the "locally unreal" one we actually
+inhabit — to see which properties of physics have to be sacrificed to
+keep locality + realism, and which emerge anyway.
+
+Further reading / watching:
+
+- [Why the universe is not locally real — and the 2022 Nobel Prize](https://youtu.be/o-g0HnbZ_kQ)
+- [Simulation hypothesis, briefly](https://youtu.be/EykaPqzzdQg)
+
 ```
 ┌──────────────────────────────────────────────────────────────┐
 │  Neural MVU  ─▶  Self-model (GRU + 8-head attention)         │
